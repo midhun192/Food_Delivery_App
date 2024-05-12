@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/controllers/cart_controller.dart';
 import 'package:food_delivery_app/data/repositories/popular_product_repo.dart';
 import 'package:food_delivery_app/models/product_model.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,11 @@ class PopularProductController extends GetxController {
 
   int _quantity = 0;
   int get quantity => _quantity;
+
+  int _inCartItems = 0;
+  int get inCartItems => _inCartItems + _quantity;
+
+  late CartController _cart;
 
   PopularProductController({
     required this.popularProductRep,
@@ -39,7 +45,7 @@ class PopularProductController extends GetxController {
   }
 
   int checkQuantity(int Quantity) {
-    if (Quantity < 0) {
+    if ((_inCartItems + Quantity) < 0) {
       Get.snackbar(
         "Item Count",
         "You Can't Reduce anymore Items!",
@@ -47,7 +53,7 @@ class PopularProductController extends GetxController {
         backgroundColor: AppColors.mainColor,
       );
       return 0;
-    } else if (Quantity > 20) {
+    } else if ((_inCartItems + Quantity) > 20) {
       Get.snackbar(
         "Item Count",
         "You Can't Add More Items!",
@@ -58,5 +64,43 @@ class PopularProductController extends GetxController {
     } else {
       return Quantity;
     }
+  }
+
+  void initProduct(ProductModel product, CartController cart) {
+    _quantity = 0;
+    _inCartItems = 0;
+    _cart = cart;
+    var exist = false;
+    exist = _cart.isExist(product);
+    print("Exist or not : " + exist.toString());
+    if (exist) {
+      _inCartItems = _cart.getQuantity(product);
+    }
+  }
+
+  void addItem(ProductModel product) {
+    // if (_quantity > 0) {
+    _cart.addItem(product, _quantity);
+    _quantity = 0;
+    _inCartItems = _cart.getQuantity(product);
+    _cart.items.forEach((key, value) {
+      print("the id is " +
+          value.id.toString() +
+          " quantity is " +
+          value.quantity.toString());
+    });
+    update();
+    // } else {
+    //   Get.snackbar(
+    //     "Item Count",
+    //     "You need to Add atleast One Item in your Cart!",
+    //     colorText: Colors.white,
+    //     backgroundColor: AppColors.mainColor,
+    //   );
+    // }
+  }
+
+  int get totalItems {
+    return _cart.totalQuantity;
   }
 }
