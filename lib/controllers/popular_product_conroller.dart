@@ -4,6 +4,7 @@ import 'package:food_delivery_app/data/repositories/popular_product_repo.dart';
 import 'package:food_delivery_app/models/product_model.dart';
 import 'package:get/get.dart';
 
+import '../models/cart_model.dart';
 import '../utils/Colors.dart';
 
 class PopularProductController extends GetxController {
@@ -52,6 +53,10 @@ class PopularProductController extends GetxController {
         colorText: Colors.white,
         backgroundColor: AppColors.mainColor,
       );
+      if (_inCartItems > 0) {
+        _quantity = -_inCartItems;
+        return _quantity;
+      }
       return 0;
     } else if ((_inCartItems + Quantity) > 20) {
       Get.snackbar(
@@ -102,5 +107,9 @@ class PopularProductController extends GetxController {
 
   int get totalItems {
     return _cart.totalQuantity;
+  }
+
+  List<CartModel> get getItems {
+    return _cart.getItems;
   }
 }

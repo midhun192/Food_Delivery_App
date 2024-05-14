@@ -1,0 +1,238 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:food_delivery_app/Screens/home/main_food_page.dart';
+import 'package:food_delivery_app/Widgets/app_icon.dart';
+import 'package:food_delivery_app/Widgets/big_text.dart';
+import 'package:food_delivery_app/Widgets/small_text.dart';
+import 'package:food_delivery_app/controllers/cart_controller.dart';
+import 'package:food_delivery_app/controllers/popular_product_conroller.dart';
+import 'package:food_delivery_app/controllers/recommended_Product_controller.dart';
+import 'package:food_delivery_app/routes/route_Helper.dart';
+import 'package:food_delivery_app/utils/Colors.dart';
+import 'package:food_delivery_app/utils/app_constants.dart';
+import 'package:get/get.dart';
+
+import '../../utils/dimensions.dart';
+
+class CartPage extends StatelessWidget {
+  const CartPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey[100],
+      body: Stack(
+        children: [
+          Positioned(
+            top: Dimensions.height45,
+            left: Dimensions.width20,
+            right: Dimensions.width20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(RouteHelper.getInitial());
+                  },
+                  child: AppIcon(
+                    icon: Icons.arrow_back_ios,
+                    iconColor: Colors.white,
+                    backgroundColor: AppColors.mainColor,
+                    // size: Dimensions.height17,
+                  ),
+                ),
+                SizedBox(width: Dimensions.width50),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(RouteHelper.getInitial());
+                  },
+                  child: AppIcon(
+                    icon: Icons.home_outlined,
+                    iconColor: Colors.white,
+                    backgroundColor: AppColors.mainColor,
+                    // size: Dimensions.height17,
+                  ),
+                ),
+                AppIcon(
+                  icon: Icons.shopping_cart_outlined,
+                  iconColor: Colors.white,
+                  backgroundColor: AppColors.mainColor,
+                  // size: Dimensions.height17,
+                )
+              ],
+            ),
+          ),
+          Positioned(
+            top: Dimensions.height45 * 2,
+            right: Dimensions.width20,
+            left: Dimensions.width20,
+            bottom: 0,
+            child: Container(
+              margin: EdgeInsets.only(top: Dimensions.height15),
+              child: MediaQuery.removePadding(
+                context: context,
+                removeTop: true,
+                child: GetBuilder<CartController>(builder: (cartController) {
+                  var _cartList = cartController.getItems;
+                  return _cartList.length == 0
+                      ? Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              BigText(
+                                  text: "Your Cart is Empty!",
+                                  color: AppColors.paraColor),
+                              BigText(
+                                  text: "Try Adding Something from the Menu ",
+                                  color: AppColors.paraColor),
+                            ],
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: _cartList.length,
+                          itemBuilder: (_, index) {
+                            return Container(
+                              width: double.maxFinite,
+                              height: Dimensions.height100,
+                              child: Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      var popularIndex =
+                                          Get.find<PopularProductController>()
+                                              .popularProductList
+                                              .indexOf(
+                                                  _cartList[index].product!);
+                                      if (popularIndex >= 0) {
+                                        Get.toNamed(RouteHelper.popularFood(
+                                            popularIndex));
+                                      } else {
+                                        var recommendedIndex = Get.find<
+                                                RecommendedProductController>()
+                                            .recommendedProductList
+                                            .indexOf(_cartList[index].product!);
+                                        if (recommendedIndex >= 0) {
+                                          Get.toNamed(
+                                              RouteHelper.recommendedFood(
+                                                  recommendedIndex));
+                                        }
+                                      }
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                          bottom: Dimensions.height10),
+                                      height: Dimensions.height100,
+                                      width: Dimensions.width50 * 2,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                              AppConstants.APP_BASE_URL +
+                                                  AppConstants.UPDLOADS +
+                                                  _cartList[index].img!),
+                                          fit: BoxFit.cover,
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                            Dimensions.height15),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: Dimensions.width10),
+                                  Expanded(
+                                    child: Container(
+                                      height: Dimensions.height100,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          BigText(
+                                            text: _cartList[index].name!,
+                                            color: Colors.black54,
+                                          ),
+                                          SmallText(text: "Spicy"),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              BigText(
+                                                text:
+                                                    "\$ ${_cartList[index].price.toString()}",
+                                                color: Colors.redAccent,
+                                              ),
+                                              Container(
+                                                padding: EdgeInsets.only(
+                                                  top: Dimensions.height5,
+                                                  bottom: Dimensions.height5,
+                                                  right: Dimensions.width5,
+                                                  left: Dimensions.width5,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          Dimensions.height20),
+                                                  color: Colors.white,
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        // popularProduct.setQuantity(false);
+                                                        cartController.addItem(
+                                                            _cartList[index]
+                                                                .product!,
+                                                            -1);
+                                                      },
+                                                      child: const Icon(
+                                                        Icons.remove,
+                                                        color:
+                                                            AppColors.signColor,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                        width:
+                                                            Dimensions.width5),
+                                                    BigText(
+                                                        text: _cartList[index]
+                                                            .quantity!
+                                                            .toString()), //popularProduct.inCartItems.toString()),
+                                                    SizedBox(
+                                                        width:
+                                                            Dimensions.width5),
+                                                    GestureDetector(
+                                                      onTap: () {
+                                                        // popularProduct.setQuantity(true);
+                                                        cartController.addItem(
+                                                            _cartList[index]
+                                                                .product!,
+                                                            1);
+                                                      },
+                                                      child: const Icon(
+                                                        Icons.add,
+                                                        color:
+                                                            AppColors.signColor,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          });
+                }),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

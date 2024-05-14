@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/Screens/cart/cart_page.dart';
 import 'package:food_delivery_app/Screens/food/popular_food_detail.dart';
 import 'package:food_delivery_app/Screens/food/recommended_food_detail.dart';
 import 'package:food_delivery_app/Screens/home/main_food_page.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MainFoodPage(),
+      initialRoute: RouteHelper.initial,
       getPages: RouteHelper.Routes,
     );
   }
