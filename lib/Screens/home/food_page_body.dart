@@ -101,7 +101,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          Get.toNamed(RouteHelper.recommendedFood(index));
+                          Get.toNamed(
+                              RouteHelper.recommendedFood(index, "home"));
                         },
                         child: Container(
                           margin: EdgeInsets.only(
@@ -161,7 +162,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       );
                     },
                   )
-                : CircularProgressIndicator(
+                : const CircularProgressIndicator(
                     color: AppColors.mainColor,
                   );
           },
@@ -170,12 +171,17 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     );
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   Widget _carouselSlider(int index, ProductModel popularProducts) {
     return Stack(
       children: [
         GestureDetector(
           onTap: () {
-            Get.toNamed(RouteHelper.popularFood(index));
+            Get.toNamed(RouteHelper.popularFood(index, 'home'));
           },
           child: Container(
             height: Dimensions.height220,

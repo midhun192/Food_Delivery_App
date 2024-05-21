@@ -21,7 +21,7 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           Positioned(
@@ -75,163 +75,207 @@ class CartPage extends StatelessWidget {
                 removeTop: true,
                 child: GetBuilder<CartController>(builder: (cartController) {
                   var _cartList = cartController.getItems;
-                  return _cartList.length == 0
-                      ? Container(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                  return ListView.builder(
+                      itemCount: _cartList.length,
+                      itemBuilder: (_, index) {
+                        return Container(
+                          width: double.maxFinite,
+                          height: Dimensions.height100,
+                          child: Row(
                             children: [
-                              BigText(
-                                  text: "Your Cart is Empty!",
-                                  color: AppColors.paraColor),
-                              BigText(
-                                  text: "Try Adding Something from the Menu ",
-                                  color: AppColors.paraColor),
-                            ],
-                          ),
-                        )
-                      : ListView.builder(
-                          itemCount: _cartList.length,
-                          itemBuilder: (_, index) {
-                            return Container(
-                              width: double.maxFinite,
-                              height: Dimensions.height100,
-                              child: Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      var popularIndex =
-                                          Get.find<PopularProductController>()
-                                              .popularProductList
-                                              .indexOf(
-                                                  _cartList[index].product!);
-                                      if (popularIndex >= 0) {
-                                        Get.toNamed(RouteHelper.popularFood(
-                                            popularIndex));
-                                      } else {
-                                        var recommendedIndex = Get.find<
-                                                RecommendedProductController>()
+                              GestureDetector(
+                                onTap: () {
+                                  var popularIndex =
+                                      Get.find<PopularProductController>()
+                                          .popularProductList
+                                          .indexOf(_cartList[index].product!);
+                                  if (popularIndex >= 0) {
+                                    Get.toNamed(
+                                      RouteHelper.popularFood(
+                                          popularIndex, "cartpage"),
+                                    );
+                                  } else {
+                                    var recommendedIndex =
+                                        Get.find<RecommendedProductController>()
                                             .recommendedProductList
                                             .indexOf(_cartList[index].product!);
-                                        if (recommendedIndex >= 0) {
-                                          Get.toNamed(
-                                              RouteHelper.recommendedFood(
-                                                  recommendedIndex));
-                                        }
-                                      }
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.only(
-                                          bottom: Dimensions.height10),
-                                      height: Dimensions.height100,
-                                      width: Dimensions.width50 * 2,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: NetworkImage(
-                                              AppConstants.APP_BASE_URL +
-                                                  AppConstants.UPDLOADS +
-                                                  _cartList[index].img!),
-                                          fit: BoxFit.cover,
-                                        ),
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.height15),
-                                      ),
+                                    if (recommendedIndex >= 0) {
+                                      Get.toNamed(
+                                        RouteHelper.recommendedFood(
+                                            recommendedIndex, "cartpage"),
+                                      );
+                                    }
+                                  }
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                      bottom: Dimensions.height10),
+                                  height: Dimensions.height100,
+                                  width: Dimensions.width50 * 2,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: NetworkImage(
+                                          AppConstants.APP_BASE_URL +
+                                              AppConstants.UPDLOADS +
+                                              _cartList[index].img!),
+                                      fit: BoxFit.cover,
                                     ),
+                                    borderRadius: BorderRadius.circular(
+                                        Dimensions.height15),
                                   ),
-                                  SizedBox(width: Dimensions.width10),
-                                  Expanded(
-                                    child: Container(
-                                      height: Dimensions.height100,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                ),
+                              ),
+                              SizedBox(width: Dimensions.width10),
+                              Expanded(
+                                child: Container(
+                                  height: Dimensions.height100,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      BigText(
+                                        text: _cartList[index].name!,
+                                        color: Colors.black54,
+                                      ),
+                                      SmallText(text: "Spicy"),
+                                      Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           BigText(
-                                            text: _cartList[index].name!,
-                                            color: Colors.black54,
+                                            text:
+                                                "\$ ${_cartList[index].price.toString()}",
+                                            color: Colors.redAccent,
                                           ),
-                                          SmallText(text: "Spicy"),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              BigText(
-                                                text:
-                                                    "\$ ${_cartList[index].price.toString()}",
-                                                color: Colors.redAccent,
-                                              ),
-                                              Container(
-                                                padding: EdgeInsets.only(
-                                                  top: Dimensions.height5,
-                                                  bottom: Dimensions.height5,
-                                                  right: Dimensions.width5,
-                                                  left: Dimensions.width5,
+                                          Container(
+                                            padding: EdgeInsets.only(
+                                              top: Dimensions.height5,
+                                              bottom: Dimensions.height5,
+                                              right: Dimensions.width5,
+                                              left: Dimensions.width5,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      Dimensions.height20),
+                                              color: Colors.white,
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    // popularProduct.setQuantity(false);
+                                                    cartController.addItem(
+                                                        _cartList[index]
+                                                            .product!,
+                                                        -1);
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.remove,
+                                                    color: AppColors.signColor,
+                                                  ),
                                                 ),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          Dimensions.height20),
-                                                  color: Colors.white,
+                                                SizedBox(
+                                                    width: Dimensions.width5),
+                                                BigText(
+                                                    text: _cartList[index]
+                                                        .quantity!
+                                                        .toString()), //popularProduct.inCartItems.toString()),
+                                                SizedBox(
+                                                    width: Dimensions.width5),
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    // popularProduct.setQuantity(true);
+                                                    cartController.addItem(
+                                                        _cartList[index]
+                                                            .product!,
+                                                        1);
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.add,
+                                                    color: AppColors.signColor,
+                                                  ),
                                                 ),
-                                                child: Row(
-                                                  children: [
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        // popularProduct.setQuantity(false);
-                                                        cartController.addItem(
-                                                            _cartList[index]
-                                                                .product!,
-                                                            -1);
-                                                      },
-                                                      child: const Icon(
-                                                        Icons.remove,
-                                                        color:
-                                                            AppColors.signColor,
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                        width:
-                                                            Dimensions.width5),
-                                                    BigText(
-                                                        text: _cartList[index]
-                                                            .quantity!
-                                                            .toString()), //popularProduct.inCartItems.toString()),
-                                                    SizedBox(
-                                                        width:
-                                                            Dimensions.width5),
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        // popularProduct.setQuantity(true);
-                                                        cartController.addItem(
-                                                            _cartList[index]
-                                                                .product!,
-                                                            1);
-                                                      },
-                                                      child: const Icon(
-                                                        Icons.add,
-                                                        color:
-                                                            AppColors.signColor,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
-                            );
-                          });
+                            ],
+                          ),
+                        );
+                      });
                 }),
               ),
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: GetBuilder<CartController>(
+        builder: (cartController) {
+          return Container(
+            padding: EdgeInsets.only(
+              top: Dimensions.height10,
+              bottom: Dimensions.height10,
+              right: Dimensions.width20,
+              left: Dimensions.width20,
+            ),
+            height: Dimensions.height120,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(Dimensions.height20 * 2),
+                topRight: Radius.circular(Dimensions.height20 * 2),
+              ),
+              color: AppColors.buttonBackgroundColor,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(
+                    top: Dimensions.height15,
+                    bottom: Dimensions.height15,
+                    right: Dimensions.width20,
+                    left: Dimensions.width20,
+                  ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(Dimensions.height20),
+                    color: Colors.white,
+                  ),
+                  child: Row(
+                    children: [
+                      BigText(text: "\$ ${cartController.totalPrice}")
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    cartController.addCartHistory();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.only(
+                      top: Dimensions.height15,
+                      bottom: Dimensions.height15,
+                      right: Dimensions.width20,
+                      left: Dimensions.width20,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.height20),
+                      color: AppColors.mainColor,
+                    ),
+                    child: BigText(text: "CheckOut", color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
