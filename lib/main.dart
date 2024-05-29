@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/Screens/auth/sign_in_page.dart';
+import 'package:food_delivery_app/Screens/auth/sign_up.dart';
 import 'package:food_delivery_app/Screens/cart/cart_page.dart';
 import 'package:food_delivery_app/Screens/food/popular_food_detail.dart';
 import 'package:food_delivery_app/Screens/food/recommended_food_detail.dart';
@@ -34,7 +36,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          // home: const SplashScreen(),
+          // home: const SignInPage(),
           initialRoute: RouteHelper.getSplashScreen(),
           getPages: RouteHelper.Routes,
         );

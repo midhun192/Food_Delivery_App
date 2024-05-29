@@ -4,6 +4,11 @@ import 'package:food_delivery_app/Widgets/big_text.dart';
 import 'package:food_delivery_app/Widgets/small_text.dart';
 import 'package:food_delivery_app/utils/Colors.dart';
 import 'package:food_delivery_app/utils/dimensions.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../../controllers/popular_product_conroller.dart';
+import '../../controllers/recommended_Product_controller.dart';
 
 class MainFoodPage extends StatefulWidget {
   const MainFoodPage({super.key});
@@ -13,11 +18,17 @@ class MainFoodPage extends StatefulWidget {
 }
 
 class _MainFoodPageState extends State<MainFoodPage> {
+  Future<void> _isLoaded() async {
+    await Get.find<PopularProductController>().getPopularProductListFromRepo();
+    await Get.find<RecommendedProductController>()
+        .getRecommendedProductListFromRepo();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: Column(
+    return RefreshIndicator(
+      onRefresh: _isLoaded,
+      child: Column(
         children: [
           // Header Section
           Container(

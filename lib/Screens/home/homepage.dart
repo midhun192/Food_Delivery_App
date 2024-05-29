@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/Screens/account/account_page.dart';
+import 'package:food_delivery_app/Screens/auth/sign_in_page.dart';
+import 'package:food_delivery_app/Screens/auth/sign_up.dart';
 import 'package:food_delivery_app/Screens/cart/cart_hisory.dart';
 import 'package:food_delivery_app/Screens/home/main_food_page.dart';
 import 'package:food_delivery_app/utils/Colors.dart';
@@ -77,7 +80,9 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           PersistentTabConfig(
-            screen: Container(child: Center(child: Text("Page 3"))),
+            screen: Container(
+              child: const Center(child: Text("Cart History")),
+            ),
             item: ItemConfig(
               icon: Icon(Icons.archive),
               activeForegroundColor: AppColors.mainColor,
@@ -95,7 +100,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           PersistentTabConfig(
-            screen: Container(child: Center(child: Text("Page 3"))),
+            screen: const AccountPage(),
             item: ItemConfig(
               icon: Icon(Icons.person),
               activeForegroundColor: AppColors.mainColor,

@@ -58,14 +58,19 @@ class _SplashScreenState extends State<SplashScreen>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ScaleTransition(
-            scale: animationController,
+            scale: Tween<double>(begin: 0, end: 1.5).animate(animation),
             child: Center(
-                child: Image.asset("assets/image/logo part 1.png",
-                    width: Dimensions.width250)),
+                child: Image.asset(
+              "assets/image/logo part 1.png",
+              width: Dimensions.width230,
+            )),
           ),
           Center(
-              child: Image.asset("assets/image/logo part 2.png",
-                  width: Dimensions.width250)),
+            child: Image.asset(
+              "assets/image/logo part 2.png",
+              width: Dimensions.width250,
+            ),
+          ),
         ],
       ),
     );

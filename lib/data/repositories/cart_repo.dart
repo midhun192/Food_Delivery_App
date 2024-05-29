@@ -12,8 +12,8 @@ class CartRepo {
   List<String> cart = [];
   List<String> cartHistory = [];
   void addToCartList(List<CartModel> cartList) {
-    /*sharedPrefs.remove(AppConstants.CART_LIST);
-    sharedPrefs.remove(AppConstants.CART_HISTORY_LIST);*/
+    // sharedPrefs.remove(AppConstants.CART_LIST);
+    // sharedPrefs.remove(AppConstants.CART_HISTORY_LIST);
     cart = [];
     DateTime time = DateTime.now();
     cartList.forEach((element) {
@@ -66,5 +66,11 @@ class CartRepo {
   void removeCart() {
     cart = [];
     sharedPrefs.remove(AppConstants.CART_LIST);
+  }
+
+  void clearCartHistory() {
+    removeCart();
+    cartHistory = [];
+    sharedPrefs.remove(AppConstants.CART_HISTORY_LIST);
   }
 }
