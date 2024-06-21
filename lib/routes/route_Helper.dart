@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:food_delivery_app/Screens/address/address_page.dart';
 import 'package:food_delivery_app/Screens/auth/sign_in_page.dart';
 import 'package:food_delivery_app/Screens/food/popular_food_detail.dart';
 import 'package:food_delivery_app/Screens/home/homepage.dart';
@@ -17,6 +18,7 @@ class RouteHelper {
   static String RecommendedFood = "/recommended_food";
   static String cartPage = "/cart_Page";
   static String signInPage = "/signIn-Page";
+  static String addressPage = "/address-page";
 
   static String getSplashScreen() => '$splashScreen';
   static String getInitial() => "$initial";
@@ -26,10 +28,14 @@ class RouteHelper {
       "$RecommendedFood?pageID=$pageID&previousPage=$previousPage";
   static String getCartPage() => "$cartPage";
   static String getSignInPage() => "$signInPage";
+  static String getAddressPage() => "$addressPage";
 
   static List<GetPage> Routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
-    GetPage(name: initial, page: () => const HomePage()),
+    GetPage(
+        name: initial,
+        page: () => const HomePage(),
+        transition: Transition.fade),
     GetPage(
       name: PopularFood,
       page: () {
@@ -64,5 +70,10 @@ class RouteHelper {
       },
       transition: Transition.fade,
     ),
+    GetPage(
+        name: addressPage,
+        page: () {
+          return AddressPage();
+        })
   ];
 }

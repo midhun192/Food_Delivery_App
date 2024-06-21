@@ -17,21 +17,16 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var emailController = TextEditingController();
+    // var emailController = TextEditingController();
     var phoneController = TextEditingController();
     var passController = TextEditingController();
 
     void _login(AuthController authController) {
-      var email = emailController.text.trim();
+      // var email = emailController.text.trim();
       var phone = phoneController.text.trim();
       var password = passController.text.trim();
 
-      if (email.isEmpty) {
-        showCustomSnackbar("Enter your Email !", title: "Email");
-      } else if (!GetUtils.isEmail(email)) {
-        showCustomSnackbar("Enter valid Email Address !",
-            title: "Invalid Email");
-      } else if (phone.isEmpty) {
+      if (phone.isEmpty) {
         showCustomSnackbar("Enter Phone Number", title: "Phone");
       } else if (phone.length < 10) {
         showCustomSnackbar("Phone Number Should have length of 10",
@@ -43,7 +38,7 @@ class SignInPage extends StatelessWidget {
             title: "Password");
       } else {
         // print(signUpBody.toString());
-        authController.login(email, phone, password).then((status) {
+        authController.login(phone, password).then((status) {
           if (status.isSuccess) {
             // Get.toNamed(RouteHelper.getInitial());
             Get.toNamed(RouteHelper.getInitial());
@@ -98,13 +93,13 @@ class SignInPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: Dimensions.height20),
-                      SignUpFields(
-                        hintText: "E-mail",
-                        obscureText: false,
-                        textController: emailController,
-                        icon: Icons.email,
-                      ),
-                      SizedBox(height: Dimensions.height20),
+                      // SignUpFields(
+                      //   hintText: "E-mail",
+                      //   obscureText: false,
+                      //   textController: emailController,
+                      //   icon: Icons.email,
+                      // ),
+                      // SizedBox(height: Dimensions.height20),
                       SignUpFields(
                         hintText: "Phone",
                         textController: phoneController,

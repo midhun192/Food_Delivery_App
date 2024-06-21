@@ -5,6 +5,7 @@ import 'package:food_delivery_app/Widgets/big_text.dart';
 import 'package:food_delivery_app/base/custom_loading_indicator.dart';
 import 'package:food_delivery_app/controllers/auth_controller.dart';
 import 'package:food_delivery_app/controllers/cart_controller.dart';
+import 'package:food_delivery_app/controllers/location_controller.dart';
 import 'package:food_delivery_app/controllers/user_controller.dart';
 import 'package:food_delivery_app/routes/route_Helper.dart';
 import 'package:food_delivery_app/utils/Colors.dart';
@@ -72,7 +73,7 @@ class AccountPage extends StatelessWidget {
                                         ),
                                         bigText: BigText(
                                             text:
-                                                userController.userModel.name),
+                                                userController.userModel!.name),
                                       ),
                                       SizedBox(height: Dimensions.height10),
                                       // Phone
@@ -86,8 +87,8 @@ class AccountPage extends StatelessWidget {
                                           size: Dimensions.height50,
                                         ),
                                         bigText: BigText(
-                                            text:
-                                                userController.userModel.phone),
+                                            text: userController
+                                                .userModel!.phone),
                                       ),
                                       SizedBox(height: Dimensions.height10),
                                       // Email
@@ -101,21 +102,55 @@ class AccountPage extends StatelessWidget {
                                           size: Dimensions.height50,
                                         ),
                                         bigText: BigText(
-                                            text:
-                                                userController.userModel.email),
+                                            text: userController
+                                                .userModel!.email),
                                       ),
                                       SizedBox(height: Dimensions.height10),
                                       // Location
-                                      AccountField(
-                                        appIcon: AppIcon(
-                                          icon: Icons.location_on,
-                                          backgroundColor: AppColors.mainColor,
-                                          iconColor: Colors.white,
-                                          iconSize: Dimensions.height30,
-                                          size: Dimensions.height50,
-                                        ),
-                                        bigText: BigText(text: "Kochi"),
-                                      ),
+                                      GetBuilder<LocationController>(
+                                          builder: (locationController) {
+                                        if (_userLoggedIn &&
+                                            locationController
+                                                .addressList.isEmpty) {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              Get.offNamed(
+                                                  RouteHelper.getAddressPage());
+                                            },
+                                            child: AccountField(
+                                              appIcon: AppIcon(
+                                                icon: Icons.location_on,
+                                                backgroundColor:
+                                                    AppColors.mainColor,
+                                                iconColor: Colors.white,
+                                                iconSize: Dimensions.height30,
+                                                size: Dimensions.height50,
+                                              ),
+                                              bigText: BigText(
+                                                  text: "Fill in Your Address"),
+                                            ),
+                                          );
+                                        } else {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              Get.offNamed(
+                                                  RouteHelper.getAddressPage());
+                                            },
+                                            child: AccountField(
+                                              appIcon: AppIcon(
+                                                icon: Icons.location_on,
+                                                backgroundColor:
+                                                    AppColors.mainColor,
+                                                iconColor: Colors.white,
+                                                iconSize: Dimensions.height30,
+                                                size: Dimensions.height50,
+                                              ),
+                                              bigText:
+                                                  BigText(text: "Your Address"),
+                                            ),
+                                          );
+                                        }
+                                      }),
                                       SizedBox(height: Dimensions.height10),
                                       // Message
                                       AccountField(
@@ -162,6 +197,8 @@ class AccountPage extends StatelessWidget {
                                             Get.find<CartController>().clear();
                                             Get.find<CartController>()
                                                 .clearCartHistoryList();
+                                            Get.find<LocationController>()
+                                                .clearAddressList();
                                             Get.toNamed(
                                                 RouteHelper.getSignInPage());
                                           } else {
