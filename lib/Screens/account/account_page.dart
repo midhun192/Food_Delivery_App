@@ -114,7 +114,7 @@ class AccountPage extends StatelessWidget {
                                                 .addressList.isEmpty) {
                                           return GestureDetector(
                                             onTap: () {
-                                              Get.offNamed(
+                                              Get.toNamed(
                                                   RouteHelper.getAddressPage());
                                             },
                                             child: AccountField(
@@ -133,7 +133,7 @@ class AccountPage extends StatelessWidget {
                                         } else {
                                           return GestureDetector(
                                             onTap: () {
-                                              Get.offNamed(
+                                              Get.toNamed(
                                                   RouteHelper.getAddressPage());
                                             },
                                             child: AccountField(
@@ -199,7 +199,7 @@ class AccountPage extends StatelessWidget {
                                                 .clearCartHistoryList();
                                             Get.find<LocationController>()
                                                 .clearAddressList();
-                                            Get.toNamed(
+                                            Get.offNamed(
                                                 RouteHelper.getSignInPage());
                                           } else {
                                             print("Logged out");

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:food_delivery_app/Screens/address/address_page.dart';
+import 'package:food_delivery_app/Screens/address/pickAddress_page.dart';
 import 'package:food_delivery_app/Screens/auth/sign_in_page.dart';
 import 'package:food_delivery_app/Screens/food/popular_food_detail.dart';
 import 'package:food_delivery_app/Screens/home/homepage.dart';
@@ -19,6 +20,7 @@ class RouteHelper {
   static String cartPage = "/cart_Page";
   static String signInPage = "/signIn-Page";
   static String addressPage = "/address-page";
+  static String pickAddressPage = "/pickAddress-page";
 
   static String getSplashScreen() => '$splashScreen';
   static String getInitial() => "$initial";
@@ -29,6 +31,7 @@ class RouteHelper {
   static String getCartPage() => "$cartPage";
   static String getSignInPage() => "$signInPage";
   static String getAddressPage() => "$addressPage";
+  static String getPickAddressPage() => '$pickAddressPage';
 
   static List<GetPage> Routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
@@ -71,9 +74,17 @@ class RouteHelper {
       transition: Transition.fade,
     ),
     GetPage(
-        name: addressPage,
-        page: () {
-          return AddressPage();
-        })
+      name: addressPage,
+      page: () {
+        return AddressPage();
+      },
+    ),
+    GetPage(
+      name: pickAddressPage,
+      page: () {
+        PickAddressPage _pickAddress = Get.arguments;
+        return _pickAddress;
+      },
+    ),
   ];
 }

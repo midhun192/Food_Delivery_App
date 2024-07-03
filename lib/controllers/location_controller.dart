@@ -18,9 +18,9 @@ class LocationController extends GetxController implements GetxService {
   late Position _pickPosition;
 
   Placemark _placeMark = Placemark();
-  Placemark get placemark => _placeMark;
+  Placemark get placeMark => _placeMark;
   Placemark _pickPlaceMark = Placemark();
-  Placemark get pickPlacemark => _pickPlaceMark;
+  Placemark get pickPlaceMark => _pickPlaceMark;
 
   List<AddressModel> _addressList = [];
   List<AddressModel> get addressList => _addressList;
@@ -88,6 +88,10 @@ class LocationController extends GetxController implements GetxService {
       } catch (e) {
         print(e);
       }
+      _loading = false;
+      update();
+    } else {
+      _updateAddressData = true;
     }
   }
 
@@ -111,15 +115,15 @@ class LocationController extends GetxController implements GetxService {
     AddressModel? _addressModel;
     try {
       var addressJson = locationRepo.getUserAddress();
+      _getAddress = jsonDecode(addressJson!);
       if (addressJson != null) {
-        _addressModel = AddressModel.fromJson(jsonDecode(addressJson));
+        _addressModel = AddressModel.fromJson(_getAddress);
       } else {
         print("No address found.");
       }
     } catch (e) {
       print("Error parsing address: $e");
     }
-
     return _addressModel;
   }
 
@@ -170,6 +174,17 @@ class LocationController extends GetxController implements GetxService {
   void clearAddressList() {
     _addressList = [];
     _addressList = [];
+    update();
+  }
+
+  String? getUserAddressFromStorage() {
+    return locationRepo.getUserAddress();
+  }
+
+  setAddAddressData() {
+    _position = _pickPosition;
+    _placeMark = _pickPlaceMark;
+    _updateAddressData = false;
     update();
   }
 }
