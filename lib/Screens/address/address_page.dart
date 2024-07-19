@@ -304,6 +304,7 @@ class _AddressPageState extends State<AddressPage> {
                           longitude:
                               locationController.position.longitude.toString(),
                         );
+                        print(_addressModel.addressType.toString());
                         locationController
                             .addAddress(_addressModel)
                             .then((response) {

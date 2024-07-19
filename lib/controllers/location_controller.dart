@@ -77,6 +77,11 @@ class LocationController extends GetxController implements GetxService {
             headingAccuracy: 1,
           );
         }
+        ResponseModel _responseModel = await getZone(
+            position.target.latitude.toString(),
+            position.target.longitude.toString(),
+            false);
+        _buttonDisabled = !_responseModel.isSuccess;
         if (_changeAddress) {
           String _address = await getAddressFromGeocode(
             LatLng(position.target.latitude, position.target.longitude),
@@ -110,6 +115,15 @@ class LocationController extends GetxController implements GetxService {
 
   late Map<String, dynamic> _getAddress;
   Map<String, dynamic> get getAddress => _getAddress;
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+  bool _inZone = false;
+  bool get inZone => _inZone;
+
+  bool _buttonDisabled = true;
+  bool get buttonDisabled => _buttonDisabled;
 
   AddressModel? getUserAddress() {
     AddressModel? _addressModel;
@@ -186,5 +200,31 @@ class LocationController extends GetxController implements GetxService {
     _placeMark = _pickPlaceMark;
     _updateAddressData = false;
     update();
+  }
+
+  Future<ResponseModel> getZone(String lat, String lng, bool markerLoad) async {
+    late ResponseModel _responseModel;
+    if (markerLoad) {
+      _loading = true;
+    } else {
+      _isLoading = true;
+    }
+    update();
+    Response response = await locationRepo.getZone(lat, lng);
+    if (response.statusCode == 200) {
+      _inZone = true;
+      _responseModel = ResponseModel(true, response.body["zone_id"].toString());
+    } else {
+      _inZone = false;
+      _responseModel = ResponseModel(true, response.statusText!);
+    }
+    if (markerLoad) {
+      _loading = false;
+    } else {
+      _isLoading = false;
+    }
+    print(response.statusCode);
+    update();
+    return _responseModel;
   }
 }

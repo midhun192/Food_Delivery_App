@@ -25,10 +25,10 @@ class AddressModel {
     _latitude = latitude;
   }
 
+  String get address => _address;
   String get addressType => _addressType;
   String? get contactPersonName => _contactPersonName;
   String? get contactPersonNumber => _contactPersonNumber;
-  String get address => _address;
   String get latitude => _latitude;
   String get longitude => _longitude;
 

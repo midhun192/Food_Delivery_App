@@ -111,43 +111,54 @@ class _PickAddressPageState extends State<PickAddressPage> {
                     bottom: Dimensions.height20 * 4,
                     left: Dimensions.width20,
                     right: Dimensions.width20,
-                    child: CustomButton(
-                      buttonText: "Pick Address",
-                      onPressed: locationController.loading
-                          ? null
-                          : () {
-                              if (locationController.pickPosition.latitude !=
-                                      0 &&
-                                  locationController.placeMark.name != null) {
-                                if (widget.fromAddress) {
-                                  if (widget.googleMapController != null) {
-                                    print("Now You Clicked on this !");
-                                    widget.googleMapController!.moveCamera(
-                                        CameraUpdate.newCameraPosition(
-                                            CameraPosition(
-                                                target: LatLng(
-                                                    locationController
-                                                        .pickPosition.latitude,
-                                                    locationController
-                                                        .pickPosition
-                                                        .longitude))));
-                                    locationController.setAddAddressData();
-                                  }
-                                  Get.toNamed(
-                                    RouteHelper.getAddressPage(),
-                                    arguments: {
-                                      'pickedAddress':
-                                          locationController.pickPlaceMark.name,
-                                      'pickedLatitude': locationController
-                                          .pickPosition.latitude,
-                                      'pickedLongitude': locationController
-                                          .pickPosition.longitude,
-                                    },
-                                  );
-                                }
-                              }
-                            },
-                    ),
+                    child: locationController.isLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : CustomButton(
+                            buttonText: widget.fromAddress
+                                ? "Pick Address"
+                                : "Pick Location",
+                            onPressed: (locationController.buttonDisabled ||
+                                    locationController.loading)
+                                ? null
+                                : () {
+                                    if (locationController
+                                                .pickPosition.latitude !=
+                                            0 &&
+                                        locationController.placeMark.name !=
+                                            null) {
+                                      if (widget.fromAddress) {
+                                        if (widget.googleMapController !=
+                                            null) {
+                                          print("Now You Clicked on this !");
+                                          widget.googleMapController!.moveCamera(
+                                              CameraUpdate.newCameraPosition(
+                                                  CameraPosition(
+                                                      target: LatLng(
+                                                          locationController
+                                                              .pickPosition
+                                                              .latitude,
+                                                          locationController
+                                                              .pickPosition
+                                                              .longitude))));
+                                          locationController
+                                              .setAddAddressData();
+                                        }
+                                        Get.toNamed(
+                                          RouteHelper.getAddressPage(),
+                                          arguments: {
+                                            'pickedAddress': locationController
+                                                .pickPlaceMark.name,
+                                            'pickedLatitude': locationController
+                                                .pickPosition.latitude,
+                                            'pickedLongitude':
+                                                locationController
+                                                    .pickPosition.longitude,
+                                          },
+                                        );
+                                      }
+                                    }
+                                  },
+                          ),
                   ),
                 ],
               ),
