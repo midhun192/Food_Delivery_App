@@ -109,7 +109,7 @@ class RecommendedFoodDetail extends StatelessWidget {
               ),
             ),
             pinned: true,
-            backgroundColor: AppColors.yellowColor,
+            backgroundColor: AppColors.mainColor,
             expandedHeight: Dimensions.height300,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.network(
@@ -157,6 +157,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                       controller.setQuantity(false);
                     },
                     child: AppIcon(
+                      iconColor: Colors.white,
                       icon: Icons.remove,
                       backgroundColor: AppColors.mainColor,
                     ),
@@ -170,6 +171,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                       controller.setQuantity(true);
                     },
                     child: AppIcon(
+                      iconColor: Colors.white,
                       icon: Icons.add,
                       backgroundColor: AppColors.mainColor,
                     ),

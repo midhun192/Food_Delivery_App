@@ -62,21 +62,21 @@ class RouteHelper {
     GetPage(
       name: cartPage,
       page: () {
-        return CartPage();
+        return const CartPage();
       },
       transition: Transition.fadeIn,
     ),
     GetPage(
       name: signInPage,
       page: () {
-        return SignInPage();
+        return const SignInPage();
       },
       transition: Transition.fade,
     ),
     GetPage(
       name: addressPage,
       page: () {
-        return AddressPage();
+        return const AddressPage();
       },
     ),
     GetPage(

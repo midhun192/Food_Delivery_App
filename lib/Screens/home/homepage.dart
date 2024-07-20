@@ -73,9 +73,9 @@ class _HomePageState extends State<HomePage> {
           PersistentTabConfig(
             screen: const MainFoodPage(),
             item: ItemConfig(
-              icon: Icon(Icons.home),
+              icon: const Icon(Icons.home),
               activeForegroundColor: AppColors.mainColor,
-              inactiveForegroundColor: Colors.amberAccent,
+              inactiveForegroundColor: const Color(0xFF95BFE3),
               title: "Home",
             ),
           ),
@@ -84,27 +84,27 @@ class _HomePageState extends State<HomePage> {
               child: const Center(child: Text("Cart History")),
             ),
             item: ItemConfig(
-              icon: Icon(Icons.archive),
+              icon: const Icon(Icons.archive),
               activeForegroundColor: AppColors.mainColor,
-              inactiveForegroundColor: Colors.amberAccent,
+              inactiveForegroundColor: const Color(0xFF95BFE3),
               title: "History",
             ),
           ),
           PersistentTabConfig(
             screen: const CartHistory(),
             item: ItemConfig(
-              icon: Icon(Icons.shopping_cart),
+              icon: const Icon(Icons.shopping_cart),
               activeForegroundColor: AppColors.mainColor,
-              inactiveForegroundColor: Colors.amberAccent,
+              inactiveForegroundColor: const Color(0xFF95BFE3),
               title: "Cart",
             ),
           ),
           PersistentTabConfig(
             screen: const AccountPage(),
             item: ItemConfig(
-              icon: Icon(Icons.person),
+              icon: const Icon(Icons.person),
               activeForegroundColor: AppColors.mainColor,
-              inactiveForegroundColor: Colors.amberAccent,
+              inactiveForegroundColor: const Color(0xFF95BFE3),
               title: "Me",
             ),
           ),

@@ -80,8 +80,7 @@ class AccountPage extends StatelessWidget {
                                       AccountField(
                                         appIcon: AppIcon(
                                           icon: Icons.phone_android,
-                                          backgroundColor:
-                                              AppColors.yellowColor,
+                                          backgroundColor: AppColors.mainColor,
                                           iconColor: Colors.white,
                                           iconSize: Dimensions.height30,
                                           size: Dimensions.height50,
@@ -95,8 +94,7 @@ class AccountPage extends StatelessWidget {
                                       AccountField(
                                         appIcon: AppIcon(
                                           icon: Icons.email,
-                                          backgroundColor:
-                                              AppColors.yellowColor,
+                                          backgroundColor: AppColors.mainColor,
                                           iconColor: Colors.white,
                                           iconSize: Dimensions.height30,
                                           size: Dimensions.height50,
@@ -156,7 +154,7 @@ class AccountPage extends StatelessWidget {
                                       AccountField(
                                         appIcon: AppIcon(
                                           icon: Icons.message,
-                                          backgroundColor: Colors.redAccent,
+                                          backgroundColor: AppColors.paraColor,
                                           iconColor: Colors.white,
                                           iconSize: Dimensions.height30,
                                           size: Dimensions.height50,
@@ -180,7 +178,7 @@ class AccountPage extends StatelessWidget {
                                       AccountField(
                                         appIcon: AppIcon(
                                           icon: Icons.help,
-                                          backgroundColor: AppColors.paraColor,
+                                          backgroundColor: AppColors.mainColor,
                                           iconColor: Colors.white,
                                           iconSize: Dimensions.height30,
                                           size: Dimensions.height50,
@@ -208,8 +206,7 @@ class AccountPage extends StatelessWidget {
                                         child: AccountField(
                                           appIcon: AppIcon(
                                             icon: Icons.exit_to_app,
-                                            backgroundColor:
-                                                AppColors.yellowColor,
+                                            backgroundColor: Colors.redAccent,
                                             iconColor: Colors.white,
                                             iconSize: Dimensions.height30,
                                             size: Dimensions.height50,
