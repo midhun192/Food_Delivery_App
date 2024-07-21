@@ -3,6 +3,7 @@ import 'package:food_delivery_app/Screens/account/account_page.dart';
 import 'package:food_delivery_app/Screens/auth/sign_in_page.dart';
 import 'package:food_delivery_app/Screens/auth/sign_up.dart';
 import 'package:food_delivery_app/Screens/cart/cart_hisory.dart';
+import 'package:food_delivery_app/Screens/favourites/favourite_product_page.dart';
 import 'package:food_delivery_app/Screens/home/main_food_page.dart';
 import 'package:food_delivery_app/utils/Colors.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
@@ -80,14 +81,12 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           PersistentTabConfig(
-            screen: Container(
-              child: const Center(child: Text("Cart History")),
-            ),
+            screen: const FavouriteProductPage(),
             item: ItemConfig(
-              icon: const Icon(Icons.archive),
+              icon: const Icon(Icons.favorite_rounded),
               activeForegroundColor: AppColors.mainColor,
               inactiveForegroundColor: const Color(0xFF95BFE3),
-              title: "History",
+              title: "Favourites",
             ),
           ),
           PersistentTabConfig(

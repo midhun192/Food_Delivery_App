@@ -203,10 +203,17 @@ class RecommendedFoodDetail extends StatelessWidget {
                       borderRadius: BorderRadius.circular(Dimensions.height20),
                       color: AppColors.mainColor,
                     ),
-                    child: Icon(
-                      Icons.favorite,
-                      color: Colors.white,
-                      size: Dimensions.height24,
+                    child: GestureDetector(
+                      onTap: () {
+                        controller.toggleFavorite(product);
+                      },
+                      child: Icon(
+                        Icons.favorite,
+                        color: controller.isFavorite(product)
+                            ? Colors.red
+                            : Colors.white,
+                        size: Dimensions.height24,
+                      ),
                     ),
                   ),
                   GestureDetector(

@@ -22,6 +22,9 @@ class PopularProductController extends GetxController {
 
   late CartController _cart;
 
+  List<ProductModel> _favourites = [];
+  List<ProductModel> get favourites => _favourites;
+
   PopularProductController({
     required this.popularProductRep,
   });
@@ -111,5 +114,27 @@ class PopularProductController extends GetxController {
 
   List<CartModel> get getItems {
     return _cart.getItems;
+  }
+
+  void addFavorite(ProductModel product) {
+    _favourites.add(product);
+    update();
+  }
+
+  void removeFavorite(ProductModel product) {
+    _favourites.remove(product);
+    update();
+  }
+
+  bool isFavorite(ProductModel product) {
+    return _favourites.contains(product);
+  }
+
+  void toggleFavorite(ProductModel product) {
+    if (isFavorite(product)) {
+      removeFavorite(product);
+    } else {
+      addFavorite(product);
+    }
   }
 }

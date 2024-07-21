@@ -36,6 +36,15 @@ class AccountPage extends StatelessWidget {
             centerTitle: true,
             backgroundColor: AppColors.mainColor,
             title: BigText(text: "Profile", color: Colors.white),
+            leading: IconButton(
+              onPressed: () {
+                Get.toNamed(RouteHelper.getInitial());
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.white,
+              ),
+            ),
           ),
           body: GetBuilder<UserController>(
             builder: (userController) {
