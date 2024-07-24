@@ -15,6 +15,14 @@ A food delivery app built with Flutter, leveraging GetX for state management and
 
 
 
+- **Homepage UI**: Displays recommended foods and popular food items.
+- **Favorite List**: Add and remove products from your favorites.
+- **Cart Functionality**: Manage items in your cart before checkout.
+- **Address Selection**: Use Google Maps API to view and select addresses on the address page.
+- **User Registration**: Register using phone or email.
+- **User Login**: Log in using your phone number.
+- **Order History**: View all your previous orders on the history page.
+
 ## Technologies Used
 
 - **Frontend**: Flutter
