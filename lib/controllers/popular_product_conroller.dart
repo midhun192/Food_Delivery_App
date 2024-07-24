@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/controllers/cart_controller.dart';
 import 'package:food_delivery_app/data/repositories/popular_product_repo.dart';
 import 'package:food_delivery_app/models/product_model.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/cart_model.dart';
 import '../utils/Colors.dart';
@@ -13,6 +16,7 @@ class PopularProductController extends GetxController {
   List<dynamic> get popularProductList => _popularProductList;
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
+  late SharedPreferences _prefs;
 
   int _quantity = 0;
   int get quantity => _quantity;
@@ -25,9 +29,18 @@ class PopularProductController extends GetxController {
   List<ProductModel> _favourites = [];
   List<ProductModel> get favourites => _favourites;
 
-  PopularProductController({
-    required this.popularProductRep,
-  });
+  PopularProductController({required this.popularProductRep});
+
+  @override
+  void onInit() {
+    super.onInit();
+    _initPreferences();
+  }
+
+  Future<void> _initPreferences() async {
+    _prefs = await SharedPreferences.getInstance();
+    _loadFavorites();
+  }
 
   Future<void> getPopularProductListFromRepo() async {
     Response response = await popularProductRep.getPopularProductList();
@@ -116,14 +129,42 @@ class PopularProductController extends GetxController {
     return _cart.getItems;
   }
 
+  // void addFavorite(ProductModel product) {
+  //   _favourites.add(product);
+  //   update();
+  // }
+  //
+  // void removeFavorite(ProductModel product) {
+  //   _favourites.remove(product);
+  //   update();
+  // }
+  //
+  // bool isFavorite(ProductModel product) {
+  //   return _favourites.contains(product);
+  // }
+  //
+  // void toggleFavorite(ProductModel product) {
+  //   if (isFavorite(product)) {
+  //     removeFavorite(product);
+  //   } else {
+  //     addFavorite(product);
+  //   }
+  // }
+
   void addFavorite(ProductModel product) {
-    _favourites.add(product);
-    update();
+    if (!_favourites.contains(product)) {
+      _favourites.add(product);
+      _saveFavorites();
+      update();
+    }
   }
 
   void removeFavorite(ProductModel product) {
-    _favourites.remove(product);
-    update();
+    if (_favourites.contains(product)) {
+      _favourites.remove(product);
+      _saveFavorites();
+      update();
+    }
   }
 
   bool isFavorite(ProductModel product) {
@@ -136,5 +177,27 @@ class PopularProductController extends GetxController {
     } else {
       addFavorite(product);
     }
+  }
+
+  void _saveFavorites() {
+    List<String> favoritesJson =
+        _favourites.map((e) => jsonEncode(e.toJson())).toList();
+    _prefs.setStringList("favorites", favoritesJson);
+  }
+
+  void _loadFavorites() {
+    List<String>? favoritesJson = _prefs.getStringList("favorites");
+    if (favoritesJson != null) {
+      _favourites = favoritesJson
+          .map((e) => ProductModel.fromJson(jsonDecode(e)))
+          .toList();
+      update();
+    }
+  }
+
+  void clearFavorites() {
+    _favourites.clear();
+    _prefs.remove("favorites");
+    update();
   }
 }

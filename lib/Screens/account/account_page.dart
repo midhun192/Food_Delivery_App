@@ -6,6 +6,7 @@ import 'package:food_delivery_app/base/custom_loading_indicator.dart';
 import 'package:food_delivery_app/controllers/auth_controller.dart';
 import 'package:food_delivery_app/controllers/cart_controller.dart';
 import 'package:food_delivery_app/controllers/location_controller.dart';
+import 'package:food_delivery_app/controllers/popular_product_conroller.dart';
 import 'package:food_delivery_app/controllers/user_controller.dart';
 import 'package:food_delivery_app/routes/route_Helper.dart';
 import 'package:food_delivery_app/utils/Colors.dart';
@@ -38,7 +39,7 @@ class AccountPage extends StatelessWidget {
             title: BigText(text: "Profile", color: Colors.white),
             leading: IconButton(
               onPressed: () {
-                Get.toNamed(RouteHelper.getInitial());
+                Get.offAndToNamed(RouteHelper.getInitial());
               },
               icon: const Icon(
                 Icons.arrow_back_ios,
@@ -206,6 +207,8 @@ class AccountPage extends StatelessWidget {
                                                 .clearCartHistoryList();
                                             Get.find<LocationController>()
                                                 .clearAddressList();
+                                            Get.find<PopularProductController>()
+                                                .clearFavorites();
                                             Get.offNamed(
                                                 RouteHelper.getSignInPage());
                                           } else {

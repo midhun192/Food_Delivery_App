@@ -28,7 +28,7 @@ class FavouriteProductPage extends StatelessWidget {
             title: BigText(text: "Favourites", color: Colors.white),
             leading: IconButton(
               onPressed: () {
-                Get.toNamed(RouteHelper.getInitial());
+                Get.offAndToNamed(RouteHelper.getInitial());
               },
               icon: const Icon(
                 Icons.arrow_back_ios,

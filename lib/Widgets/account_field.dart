@@ -16,6 +16,8 @@ class AccountField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.maxFinite,
+      margin:
+          EdgeInsets.only(left: Dimensions.width10, right: Dimensions.width10),
       padding: EdgeInsets.only(
           left: Dimensions.width20,
           top: Dimensions.height10,
@@ -24,11 +26,13 @@ class AccountField extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            blurRadius: 1,
-            offset: const Offset(0, 2),
+            blurRadius: 3,
+            spreadRadius: 1,
+            offset: const Offset(1, 1),
             color: Colors.grey.withOpacity(0.2),
           ),
         ],
+        borderRadius: BorderRadius.circular(Dimensions.height15),
       ),
       child: Row(
         children: [
