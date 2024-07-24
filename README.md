@@ -4,13 +4,28 @@ A food delivery app built with Flutter, leveraging GetX for state management and
 
 ## Features
 
-  ![Homepage UI](assets/image/user_registration.png)               ![Homepage UI](assets/image/user_login.png)               ![Homepage UI](assets/image/homepage_ui.png)
-  
-  ![Favorite List](assets/image/Popular_Food.png)               ![Cart Functionality](assets/image/Recommended_Food.png)               ![Address Selection 1](assets/image/favorite_list.png)
+  <div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+  <img src="assets/image/user_registration.png" alt="User Registration" width="30%" style="margin-right: 5px; margin-bottom: 10px;">
+  <img src="assets/image/user_login.png" alt="User Login" width="30%" style="margin-right: 5px; margin-bottom: 10px;">
+  <img src="assets/image/homepage_ui.png" alt="Homepage UI" width="30%" style="margin-bottom: 10px;">
+</div>
 
-  ![Address Selection 2](assets/image/Image_6.png)               ![User Registration](assets/image/address_selection_1.png)               ![User Login](assets/image/address_selection_2.png)
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+  <img src="assets/image/Popular_Food.png" alt="Favorite List" width="30%" style="margin-right: 5px; margin-bottom: 10px;">
+  <img src="assets/image/Recommended_Food.png" alt="Cart Functionality" width="30%" style="margin-right: 5px; margin-bottom: 10px;">
+  <img src="assets/image/favorite_list.png" alt="Address Selection 1" width="30%" style="margin-bottom: 10px;">
+</div>
 
-  ![Cart Functionality](assets/image/cart_functionality.png)               ![Order History](assets/image/order_history.png)
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+  <img src="assets/image/Image_6.png" alt="Address Selection 2" width="30%" style="margin-right: 5px; margin-bottom: 10px;">
+  <img src="assets/image/address_selection_1.png" alt="User Registration" width="30%" style="margin-right: 5px; margin-bottom: 10px;">
+  <img src="assets/image/address_selection_2.png" alt="User Login" width="30%" style="margin-bottom: 10px;">
+</div>
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+  <img src="assets/image/cart_functionality.png" alt="Cart Functionality" width="30%" style="margin-right: 5px; margin-bottom: 10px;">
+  <img src="assets/image/order_history.png" alt="Order History" width="30%" style="margin-bottom: 10px;">
+</div>
 
 ## Demo
 
