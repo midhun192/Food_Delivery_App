@@ -5,7 +5,7 @@ A food delivery app built with Flutter, leveraging GetX for state management and
 ## Features
 
 - **Homepage UI**: Displays recommended foods and popular food items.
-  ![Homepage UI](assets/image/order_history (1).png)
+  ![Homepage UI](assets/image/order_history1.png)
   
 - **Popular Food UI**: Displays  popular food item Deatils.
   ![Homepage UI](assets/image/homepage_ui.png)
