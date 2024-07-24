@@ -3,14 +3,6 @@
 A food delivery app built with Flutter, leveraging GetX for state management and a Laravel backend. This app provides users with an intuitive and engaging interface to browse, order, and enjoy their favorite meals from various restaurants.
 
 
-## Demo
-
-Here is a video demonstration of all the features:
-
-[![Food Delivery App Demo](images/video_thumbnail.png)](video/demo_video.mp4)
-
-
-
 ## Features
 
   ![Homepage UI](assets/image/user_registration.png)                              ![Homepage UI](assets/image/user_login.png)                              ![Homepage UI](assets/image/homepage_ui.png)                       ![Favorite List](assets/image/Popular_Food.png)
@@ -20,10 +12,6 @@ Here is a video demonstration of all the features:
   
   
   ![User Login](assets/image/address_selection_2.png)                              ![Cart Functionality](assets/image/cart_functionality.png)                      ![Order History](assets/image/order_history.png)
-
-## Demo
-
-Here is a video demonstration of all the features:
 
 
 
