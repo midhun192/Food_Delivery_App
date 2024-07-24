@@ -5,25 +5,32 @@ A food delivery app built with Flutter, leveraging GetX for state management and
 ## Features
 
 - **Homepage UI**: Displays recommended foods and popular food items.
+  ![Homepage UI](assets/image/homepage_ui.png)
   
+- **Popular Food UI**: Displays  popular food item Deatils.
+  ![Homepage UI](assets/image/homepage_ui.png)
+
+- **Recommended Food UI**: Displays  recommended food item Deatils.
+  ![Homepage UI](assets/image/homepage_ui.png)
 
 - **Favorite List**: Add and remove products from your favorites.
-  
+  ![Favorite List](assets/image/favorite_list.png)
 
 - **Cart Functionality**: Manage items in your cart before checkout.
-  
+  ![Cart Functionality](assets/image/cart_functionality.png)
 
 - **Address Selection**: Use Google Maps API to view and select addresses on the address page.
-  
+  ![Address Selection 1](assets/image/address_selection_1.png)
+  ![Address Selection 2](assets/image/address_selection_2.png)
 
 - **User Registration**: Register using phone or email.
-  
+  ![User Registration](assets/image/user_registration.png)
 
 - **User Login**: Log in using your phone number.
-  
+  ![User Login](assets/image/user_login.png)
 
 - **Order History**: View all your previous orders on the history page.
-  
+  ![Order History](assets/image/order_history.png)
 
 ## Demo
 
