@@ -4,7 +4,7 @@ A food delivery app built with Flutter, leveraging GetX for state management and
 
 ## Features
 
-  ![Homepage UI](assets/image/user_registration.png)               ![Homepage UI](assets/image/user_login.png)               ![Homepage UI](assets/image/homepage_ui.png)
+  ![Homepage UI](assets/image/user_registration.png)                              ![Homepage UI](assets/image/user_login.png)                              ![Homepage UI](assets/image/homepage_ui.png)
   
   ![Favorite List](assets/image/Popular_Food.png)               ![Cart Functionality](assets/image/Recommended_Food.png)               ![Address Selection 1](assets/image/favorite_list.png)
 
